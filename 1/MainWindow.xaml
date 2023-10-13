@@ -3,18 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Учет финансов" Height="450" Width="940" MinWidth="940" MinHeight="400" Icon="/free-icon-accounting-1570998.png">
     <Window.Resources>
+        <!-- Стиль для текстового поля "Сумма" -->
         <Style x:Key="PlaceHolderTextBoxStyle" TargetType="TextBox">
             <Setter Property="Text" Value="Сумма" />
             <Style.Triggers>
+                <!-- Когда поле получает фокус, текст убирается -->
                 <Trigger Property="IsFocused" Value="True">
                     <Setter Property="Text" Value="" />
                 </Trigger>
             </Style.Triggers>
         </Style>
 
+        <!-- Стиль для текстового поля "Описание" -->
         <Style x:Key="PlaceHolderDescriptionTextBoxStyle" TargetType="TextBox">
             <Setter Property="Text" Value="Описание" />
             <Style.Triggers>
+                <!-- Когда поле получает фокус, текст убирается -->
                 <Trigger Property="IsFocused" Value="True">
                     <Setter Property="Text" Value="" />
                 </Trigger>
@@ -22,22 +26,30 @@
         </Style>
     </Window.Resources>
     <Grid>
+        <!-- Кнопка для удаления записи -->
         <Button Content="Удалить запись" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="793,10,0,0" Click="Delete"/>
 
+        <!-- Текстовое поле "Сумма" с применением стиля "PlaceHolderTextBoxStyle" -->
         <TextBox x:Name="txtСумма" Style="{StaticResource PlaceHolderTextBoxStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="120" PreviewTextInput="txtСумма_PreviewTextInput" GotFocus="TextBox_GotFocus" />
+        <!-- Текстовое поле "Описание" с применением стиля "PlaceHolderDescriptionTextBoxStyle" -->
         <TextBox x:Name="txtОписание" Style="{StaticResource PlaceHolderDescriptionTextBoxStyle}" HorizontalAlignment="Left" Margin="140,10,0,0" VerticalAlignment="Top" Width="250" GotFocus="TextBox_GotFocus" />
 
+        <!-- Комбобокс для выбора типа транзакции (доход или расход) -->
         <ComboBox x:Name="cmbТипТранзакции" HorizontalAlignment="Left" Margin="400,10,0,0" VerticalAlignment="Top" Width="100">
             <ComboBoxItem Content="Доход" />
             <ComboBoxItem Content="Расход" />
         </ComboBox>
 
+        <!-- Кнопка для добавления записи -->
         <Button Content="Добавить запись" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="520,10,0,0" Click="Button_Click"/>
+        <!-- Кнопка для редактирования записи -->
         <Button Content="Редактировать запись" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Margin="648,10,0,0" Click="EditButton_Click"/>
 
+        <!-- ListView для отображения данных в виде таблицы -->
         <ListView x:Name="listView" HorizontalAlignment="Center" Margin="0,40,0,0" VerticalAlignment="Top" Width="905">
             <ListView.View>
                 <GridView>
+                    <!-- Колонки таблицы с данными -->
                     <GridViewColumn Header="ID транзакции" Width="100" DisplayMemberBinding="{Binding TransactionID}" />
                     <GridViewColumn Header="Сумма" Width="100" DisplayMemberBinding="{Binding Amount}" />
                     <GridViewColumn Header="Описание" Width="300" DisplayMemberBinding="{Binding Description}" />
