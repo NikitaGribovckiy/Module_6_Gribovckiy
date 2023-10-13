@@ -18,6 +18,7 @@ namespace _1
             InitializeComponent();
             LoadTransactions();
         }
+        
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -70,19 +71,6 @@ namespace _1
                 MessageBox.Show("Произошла ошибка: " + ex.Message);
             }
         }
-        private void txtСумма_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            if (!IsNumeric(e.Text))
-            {
-                e.Handled = true; // Отменить ввод неправильных символов
-            }
-        }
-
-        private bool IsNumeric(string text)
-        {
-            return !string.IsNullOrEmpty(text) && text.All(char.IsDigit);
-        }
-
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
@@ -195,8 +183,28 @@ namespace _1
                 MessageBox.Show("Выберите запись для удаления.");
             }
         }
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text == "Сумма" || textBox.Text == "Описание")
+            {
+                textBox.Text = "";
+            }
+        }
 
 
+        private void txtСумма_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!IsNumeric(e.Text))
+            {
+                e.Handled = true; // Отменить ввод неправильных символов
+            }
+        }
+
+        private bool IsNumeric(string text)
+        {
+            return !string.IsNullOrEmpty(text) && text.All(char.IsDigit);
+        }
         private void ResetForm()
         {
             selectedTransactionID = -1;
